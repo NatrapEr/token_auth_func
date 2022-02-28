@@ -19,8 +19,9 @@ function gen_token()
 }
 
 $send_token = $dump_token = $crypt_token = 0;
-$token = $dump_token = gen_token();
+$token = $dump_token = 'password';
 $send_token = $dump_token;
+// gen_token();
 
 // generate and send token
 
@@ -43,6 +44,8 @@ print " crypt_token-before";
 echo "\t";
 echo $crypt_token;
 echo "\n";
+echo "\n";
+echo "-----------------generate crypt token-----------------";
 $crypt_token = hash('sha256', $crypt_token);
 echo "\n";
 print " crypt_token-after";
@@ -51,8 +54,8 @@ echo $crypt_token;
 echo "\n";
 
 // clean token
+$send_token = $dump_token = 0;
 
-$send_token = $dump_token = $crypt_token = 0;
 
 echo "\n";
 echo "-----------------clean token-----------------------------";
@@ -79,5 +82,17 @@ echo "\n";
 // after user authorization 
 // dump and send token are 
 // cleans up
+
+echo "\n";
+echo "\n";
+
+$data = $token;
+
+foreach (hash_algos() as $v) {
+        $r = hash($v, $data, false);
+        echo "\n";
+        printf("%-12s %3d %s\n", $v, strlen($r), $r);
+        echo "\n";
+} 
 
 ?>
