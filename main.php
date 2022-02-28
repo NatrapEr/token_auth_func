@@ -18,7 +18,7 @@ function gen_token()
 	);
 }
 
-$send_token = $dump_token = 0;
+$send_token = $dump_token = $crypt_token = 0;
 $token = $dump_token = gen_token();
 $send_token = $dump_token;
 
@@ -39,10 +39,20 @@ print " send_token";
 echo "\t";
 echo $send_token;
 echo "\n";
+print " crypt_token-before";
+echo "\t";
+echo $crypt_token;
+echo "\n";
+$crypt_token = hash('sha256', $crypt_token);
+echo "\n";
+print " crypt_token-after";
+echo "\t";
+echo $crypt_token;
+echo "\n";
 
 // clean token
 
-$send_token = $dump_token = 0;
+$send_token = $dump_token = $crypt_token = 0;
 
 echo "\n";
 echo "-----------------clean token-----------------------------";
@@ -58,6 +68,10 @@ echo "\n";
 print " send_token";
 echo "\t";
 echo $send_token;
+echo "\n";
+print " crypt_token";
+echo "\t";
+echo $crypt_token;
 echo "\n";
 
 // $token it's variable to 
